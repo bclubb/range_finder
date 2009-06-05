@@ -10,6 +10,7 @@ void setup()
   pinMode(greenPin, OUTPUT);
   pinMode(yellowPin, OUTPUT);
   pinMode(redPin, OUTPUT);
+  Serial.begin(9600);
 }
 
 void loop()
@@ -34,18 +35,30 @@ void loop()
   // convert the time into a distance
   //inches = microsecondsToInches(duration);
   cm = microsecondsToCentimeters(duration);
-  
+  Serial.println(cm);
   if(cm < 300)
   {
     digitalWrite(greenPin, HIGH);
+  }
+  else
+  {
+    digitalWrite(greenPin, LOW);
   }
   if(cm < 100)
   {
     digitalWrite(yellowPin, HIGH);
   }
+  else
+  {
+    digitalWrite(yellowPin, LOW);
+  }
   if(cm < 50)
   {
     digitalWrite(redPin, HIGH);
+  }
+  else
+  {
+    digitalWrite(redPin, LOW);
   }
 
   delay(10);
