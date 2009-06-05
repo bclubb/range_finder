@@ -1,8 +1,15 @@
 int pingPin = 7;
 
+int greenPin = 2;
+int redPin = 3;
+int yellowPin = 4;
+
+
 void setup()
 {
-  Serial.begin(9600);
+  pinMode(greenPin, OUTPUT);
+  pinMode(yellowPin, OUTPUT);
+  pinMode(redPin, OUTPUT);
 }
 
 void loop()
@@ -25,15 +32,22 @@ void loop()
   duration = pulseIn(pingPin, HIGH);
 
   // convert the time into a distance
-  inches = microsecondsToInches(duration);
+  //inches = microsecondsToInches(duration);
   cm = microsecondsToCentimeters(duration);
   
-  Serial.print(inches);
-  Serial.print("in, ");
-  Serial.print(cm);
-  Serial.print("cm");
-  Serial.println();
-  
+  if(cm < 300)
+  {
+    digitalWrite(greenPin, HIGH);
+  }
+  if(cm < 100)
+  {
+    digitalWrite(yellowPin, HIGH);
+  }
+  if(cm < 50)
+  {
+    digitalWrite(redPin, HIGH);
+  }
+
   delay(10);
 }
 
